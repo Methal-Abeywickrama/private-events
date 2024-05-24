@@ -1,7 +1,7 @@
 # README
+This project is as per the curriculum of the odin project. 
+https://www.theodinproject.com/lessons/ruby-on-rails-private-events
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
 Things you may want to cover:
 
