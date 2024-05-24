@@ -1,0 +1,12 @@
+
+<ul>
+  <li>First Name <@user.first_name></ul>
+  <li>Last Name<@user.last_name></ul>
+  <li>Telephone Number<@user.telephone_number></ul>
+  <li>Events:
+    <ul>
+      <% @user.events.all do |event|%>
+      <li><%= event.name %></li>
+    </ul>
+  </li>
+</ul>
