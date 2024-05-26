@@ -1,0 +1,11 @@
+<div class="home_page">
+  <h1> Welcome to event Manager</h1>
+
+   <%= render 'events/event_list', locals: { events: @events } %>
+
+
+    <% unless user_signed_in? %>
+      <div class="sign_in">Sign In</div>
+       <%= link_to 'Sing in', new_user_session_path %>
+    <% end %>
+</div>
