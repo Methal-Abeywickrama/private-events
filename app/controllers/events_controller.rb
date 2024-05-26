@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  
+  before_action :authenticate_user!, only: [:new, :create]
   def index 
     @events = Event.all 
   end
@@ -8,9 +8,17 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
+  def show
+    @event = Event.find_by(id: params[:id])
+    if @event.nil?
+      redirect_to events_path, alert: "Event not found"
+    end
+  end
+
   def create
-    @event = current_user.Event.build(event_params)
+    @event = current_user.events.build(event_params)
     if @event.save
+      puts 'neega'
       redirect_to @event, notice: "The event was successfully created "
     else  
       render :new, status: :unprocessable_entity
