@@ -3,4 +3,5 @@
   <div class="event_details"> <%= @event.details %> </div>
   <div class="event_date"> <%= @event.date %> </div>
   <div class="event_location"> <%= @event.location %> </div>
+  <div class="join_button"><%= link_to 'Join', new_event_event_attendance_path(@event), method: :post, class: 'join_button' %></div>
 </div>

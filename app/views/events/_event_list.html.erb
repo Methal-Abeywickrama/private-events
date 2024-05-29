@@ -4,7 +4,8 @@
 <div class="event_container">
   <% @events.each do |event| %>
     <div class="event_summary">
-      <h2 class="event_name"><%= event.name%></h2>
+       
+      <h2 class="event_name"><%= link_to event.name, event %></h2>
       <p class="event_location"><%= event.location%></p>
       <p class="event_date"><%= event.date%></p>
     </div>
