@@ -1,9 +1,9 @@
 
-<h1 class="heading">List Of Available Events</h2>
+<h2 class="heading">List Of Available Events</h2>
 
 <div class="event_container">
   <% @events.each do |event| %>
-    <div class="event_summary">
+    <div class="event_summary card bg-secondary-subtle">
        
       <h2 class="event_name"><%= link_to event.name, event %></h2>
       <p class="event_location"><%= event.location%></p>
