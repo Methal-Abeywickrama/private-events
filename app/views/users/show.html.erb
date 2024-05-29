@@ -7,6 +7,16 @@
     <ul>
       <% @user.events.all do |event|%>
       <li><%= event.name %></li>
+      <% end %>
     </ul>
   </li>
+  <li><%= @user.attended_events[1].name%></li>
+  
+  
+  <li>Attended Events:</li>
+   <li> <ul>
+    <% @user.attended_events.each do |a|%>
+    <li> <%= a.name %> </li>
+    <% end %>
+  </ul></li>
 </ul>
