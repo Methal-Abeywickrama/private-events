@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_074715) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_103438) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "event_attendances", force: :cascade do |t|
-    t.bigint "users_id", null: false
-    t.bigint "events_id", null: false
+    t.bigint "attendee_id", null: false
+    t.bigint "attended_event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["events_id"], name: "index_event_attendances_on_events_id"
-    t.index ["users_id"], name: "index_event_attendances_on_users_id"
+    t.index ["attended_event_id"], name: "index_event_attendances_on_attended_event_id"
+    t.index ["attendee_id"], name: "index_event_attendances_on_attendee_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -59,6 +59,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_074715) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "event_attendances", "events", column: "events_id"
-  add_foreign_key "event_attendances", "users", column: "users_id"
+  add_foreign_key "event_attendances", "events", column: "attended_event_id"
+  add_foreign_key "event_attendances", "users", column: "attendee_id"
 end
