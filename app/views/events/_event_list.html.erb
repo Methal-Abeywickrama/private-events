@@ -1,8 +1,20 @@
 
 <h2 class="heading">List Of Available Events</h2>
 
-<div class="event_container">
-  <% @events.each do |event| %>
+<div class="past_event_container">
+  <h3>Past Events</h3>
+  <% @events.past_events.each do |event| %>
+    <div class="event_summary card bg-secondary-subtle">
+       
+      <h2 class="event_name"><%= link_to event.name, event %></h2>
+      <p class="event_location"><%= event.location%></p>
+      <p class="event_date"><%= event.date%></p>
+    </div>
+  <% end %>
+</div>
+<div class="upcoming_event_container">
+  <h3>Upcoming Events</h3>
+  <% @events.upcoming_events.each do |event| %>
     <div class="event_summary card bg-secondary-subtle">
        
       <h2 class="event_name"><%= link_to event.name, event %></h2>

@@ -14,9 +14,16 @@
   
   
   <li>Attended Events:</li>
+  <li>Past:</li>
    <li> <ul>
     <% @user.attended_events.each do |a|%>
-    <li> <%= a.name %> </li>
+    <li> <%= a.name if a.date < Date.today %> </li>
+    <% end %>
+  </ul></li>
+  <li>Future:</li>
+   <li> <ul>
+    <% @user.attended_events.each do |a|%>
+    <li> <%= a.name if a.date > Date.today %> </li>
     <% end %>
   </ul></li>
 </ul>
