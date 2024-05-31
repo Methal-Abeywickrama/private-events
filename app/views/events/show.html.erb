@@ -4,7 +4,9 @@
   <div class="event_date"> <%= @event.date %> </div>
   <div class="event_location"> <%= @event.location %> </div>
   <div class="join_button"><%= link_to 'Join', new_event_event_attendance_path(@event), method: :post, class: 'join_button' %></div>
-  <ul>
+  <%= link_to 'Edit', edit_event_path(@event), method: :post %>
+  <%= link_to 'Delete', event_path(@event), method: :delete, data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+  <ul>  
     <% @event.attendees.each do |a|%>
     <li> <%= a.email %> </li>
     <% end %>

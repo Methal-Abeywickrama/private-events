@@ -1,8 +1,8 @@
 
 <ul>
-  <li>First Name <@user.first_name></ul>
-  <li>Last Name<@user.last_name></ul>
-  <li>Telephone Number<@user.telephone_number></ul>
+  <li>First Name <%= @user.first_name %></li>
+  <li>Last Name<%= @user.last_name %></li>
+  <li>Telephone Number<%= @user.telephone_number %></li>
   <li>Events:
     <ul>
       <% @user.events.all do |event|%>
@@ -10,20 +10,25 @@
       <% end %>
     </ul>
   </li>
-  <li><%= @user.attended_events[1].name%></li>
   
   
   <li>Attended Events:</li>
   <li>Past:</li>
    <li> <ul>
     <% @user.attended_events.each do |a|%>
-    <li> <%= a.name if a.date < Date.today %> </li>
+      <% if a.date < Date.today %>
+        <li> <%= a.name %> </li>
+        <li> <%= link_to 'Delete', event_event_attendance_path(a), method: :delete, data: { turbo_method: :delete, confirm: 'Are you sure?' } %></li>
+      <% end %>
     <% end %>
   </ul></li>
   <li>Future:</li>
    <li> <ul>
     <% @user.attended_events.each do |a|%>
-    <li> <%= a.name if a.date > Date.today %> </li>
+      <% if a.date > Date.today %>
+        <li> <%= a.name %> </li>
+        <li> <%= link_to 'Delete', event_event_attendance_path(a), method: :delete, data: { turbo_method: :delete, confirm: 'Are you sure?' } %></li>
+      <% end %>
     <% end %>
   </ul></li>
 </ul>

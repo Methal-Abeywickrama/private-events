@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
+  before_action :relevant_creator, only: [:edit, :destroy]
+
   def index 
     @events = Event.all 
   end
@@ -25,9 +27,41 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    puts 'what event'
+    @event = Event.find_by(id: params[:id])
+    if @event.destroy
+      redirect_to events_url, notice: 'Event was successfully deleted.'
+    else
+      redirect_to events_url, alert: 'Event could not be deleted'
+    end
+  end
+
+
+  def edit
+    @event = Event.find_by(id: params[:id])
+  end
+  
+  def update
+    @event = Event.find_by(id: params[:id])
+    
+    if @event.update(event_params)
+      redirect_to @event, notice: "Event was successfully updated"
+    else 
+      render :edit, status: :unprocessable_entity
+    end
+  end
   private
 
   def event_params
     params.require(:event).permit(:name, :details, :location, :date)
+  end
+
+  def relevant_creator
+    @event = Event.find_by(id: params[:id])
+    unless @event.creator_id == current_user.id
+      flash[:alert] = "Permission denied"
+      redirect_to root_path
+    end
   end
 end
