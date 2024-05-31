@@ -6,6 +6,15 @@
   <div class="join_button"><%= link_to 'Join', new_event_event_attendance_path(@event), method: :post, class: 'join_button' %></div>
   <%= link_to 'Edit', edit_event_path(@event), method: :post %>
   <%= link_to 'Delete', event_path(@event), method: :delete, data: { turbo_method: :delete, confirm: 'Are you sure?' } %>
+  <% if @event.creator_id == current_user.id %>
+    <div>Add Participant</div>
+    <%=form_with url: invite_participants_event_event_attendances_path(@event), method: :post do |f| %>
+      <%= f.label :invitee, 'Invitee\'s email: '%>
+      <%= f.text_field :invitee%>
+      <%= f.hidden_field :event_id, value: @event.id %>
+      <%= f.submit :add %>
+    <% end %>
+  <% end %>
   <ul>  
     <% @event.attendees.each do |a|%>
     <li> <%= a.email %> </li>

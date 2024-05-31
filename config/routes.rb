@@ -10,7 +10,12 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :home
   resources :events do
-    resources :event_attendances
+    resources :event_attendances do
+      collection do
+        post 'invite_participants', to: 'event_attendances#invite_participants'
+      end
+    end
+    
   end
   
 

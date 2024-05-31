@@ -13,6 +13,18 @@ class EventAttendancesController < ApplicationController
     end
   end
 
+  def invite_participants
+    p params
+    @event = Event.find(params[:event_id])
+    invitee = User.find_by(email: params[:invitee])
+    @event_attendance = @event.event_attendances.build(attendee: invitee)
+    if @event_attendance.save
+      redirect_to @event, notice: 'You have successfully invited user for the event.'
+    else
+      redirect_to @event, alert: 'Unable to register user for the event.'
+    end
+  end
+
   def destroy
     puts 'info'
     p params

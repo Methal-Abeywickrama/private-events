@@ -51,10 +51,11 @@ class EventsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
   private
 
   def event_params
-    params.require(:event).permit(:name, :details, :location, :date)
+    params.require(:event).permit(:name, :details, :location, :date, :private)
   end
 
   def relevant_creator
